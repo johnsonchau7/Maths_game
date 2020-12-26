@@ -90,25 +90,46 @@ public class GameOverFragment extends Fragment {
         set_game_outcome(view, game_outcome);
     }
 
-    public HashMap<String, String> decoding_game_outcome(String game_outcome){
-        HashMap<String, String> decoded_outcome = new HashMap<String, String>();
-        String[] game_outcome_key_values = game_outcome.split(",");
+    public void set_game_outcome(View view, String game_outcome){
+        HashMap<String, String> decoded_outcome = Parser.decoding_game_outcome(game_outcome);
 
-        for (String key_value_pair : game_outcome_key_values){
-            String[] key_value_split = key_value_pair.split(":");
-            decoded_outcome.put(key_value_split[0], key_value_split[1]);
-        }
+        set_game_condition_string(decoded_outcome.get("gameCondition"));
 
-        return decoded_outcome;
+        set_game_score_string(decoded_outcome.get("gameScore"));
+
+        set_game_time_string(decoded_outcome.get("gameTime"));
     }
 
-    public void set_game_outcome(View view, String game_outcome){
-        HashMap<String, String> decoded_outcome = decoding_game_outcome(game_outcome);
+    public String long_to_string_time_converter(String time_string){
+        long user_milli_second_time = Long.parseLong(time_string);
 
-        TextView current_game_outcome = (TextView) view.findViewById(R.id.game_outcome_text);
-        current_game_outcome.setText(decoded_outcome.get("gameCondition"));
+        int seconds = (int) (user_milli_second_time / 1000);
 
-        TextView current_game_score = (TextView) view.findViewById(R.id.score_outcome_text);
-        current_game_score.setText(decoded_outcome.get("gameScore"));
+        int minutes = seconds / 60;
+
+        seconds = seconds % 60;
+
+        int milli_seconds = (int) (user_milli_second_time % 1000);
+
+        String current_time = String.format("%d:%02d:%03d", minutes,
+                seconds, milli_seconds);
+
+        return current_time;
+    }
+
+    public void set_game_condition_string(String game_condition){
+        TextView current_game_outcome = (TextView) getView().findViewById(R.id.game_outcome_text);
+        current_game_outcome.setText(game_condition);
+    }
+
+    public void set_game_score_string(String game_score){
+        TextView current_game_score = (TextView) getView().findViewById(R.id.score_outcome_text);
+        current_game_score.setText(String.format("Score: %s", game_score));
+    }
+
+    public void set_game_time_string(String game_time){
+        TextView current_game_time = (TextView) getView().findViewById(R.id.time_outcome_text);
+        String current_time = long_to_string_time_converter(game_time);
+        current_game_time.setText(String.format("Time: %s", current_time));
     }
 }

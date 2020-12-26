@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.os.Handler;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -40,11 +42,18 @@ public class GameFragment extends Fragment{
     HashMap<String, Integer> difficulty_levels;
     static String current_difficulty;
 
+    //Stores information about mode
+    HashMap<String, Integer> rounds_levels;
+
     //Stores interface variables
     Button button0, button1, button2, button3, button4, button5, button6,
             button7, button8, button9, button_delete, button_enter;
 
     String[] game_conditions = {"Win", "Lose"};
+
+    TextView timer;
+
+    Handler handler;
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -79,7 +88,16 @@ public class GameFragment extends Fragment{
         difficulty_levels.put(all_difficulties[1], 3);
         difficulty_levels.put(all_difficulties[2], 4);
 
-        current_difficulty = "Easy";
+        current_difficulty = all_difficulties[0];
+
+        rounds_levels = new HashMap<String, Integer>();
+        String[] all_rounds = ModeFragment.get_all_rounds();
+
+        rounds_levels.put(all_rounds[0], 5);
+        rounds_levels.put(all_rounds[1], 10);
+        rounds_levels.put(all_rounds[2], 15);
+
+        handler = new Handler();
     }
 
     /**
@@ -120,31 +138,29 @@ public class GameFragment extends Fragment{
         super.onViewCreated(view, savedInstanceState);
 
         //1. set up navigation control for finish game
-        NavController navController = Navigation.findNavController(view);
         Button finish_button = (Button) view.findViewById(R.id.finish_button);
 
         finish_button.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-
-                Bundle bundle = new Bundle();
-                String encoding = user1.get_user_encoded();
-
-                bundle.putString("game_to_gameover", encoding);
-
-                navController.navigate(R.id.action_gameFragment_to_gameOverFragment, bundle);
+                stop_game(view);
             }
         });
 
         //2. get mode from user
         Bundle bundle = getArguments();
-        String input_difficulty = bundle.getString("key");
+        String mode_strings = bundle.getString("mode_to_game");
+        HashMap<String, String> mode_hash_map = Parser.decoding_game_outcome(mode_strings);
+        String input_difficulty = mode_hash_map.get("gameDifficulty");
+        String input_rounds = mode_hash_map.get("gameRounds");
+
         set_current_difficulty(input_difficulty);
+        set_current_rounds(rounds_levels.get(input_rounds));
 
         //3. set up user interface
         write_user_input(view);
-
+        start_timer(view);
 
         //4. start game
         set_score(view);
@@ -187,14 +203,15 @@ public class GameFragment extends Fragment{
     public void set_question(View view){
         TextView number1 = (TextView) view.findViewById(R.id.number1);
         TextView number2 = (TextView) view.findViewById(R.id.number2);
-        TextView current_mode = (TextView) view.findViewById(R.id.mode);
-        TextView question_difficulty = (TextView) view.findViewById(R.id.mode_text);
+        TextView current_mode = (TextView) getView().findViewById(R.id.mode);
+        TextView question_difficulty = (TextView) view.findViewById(R.id.question_difficulty_text);
 
         //1. show question
         number1.setText(String.valueOf(qs.n1));
         current_mode.setText(qs.mode);
         number2.setText(String.valueOf(qs.n2));
-        question_difficulty.setText(current_difficulty);
+        question_difficulty.setText(String.format("Mode: %s", current_difficulty));
+
     }
 
     public void get_user_input(View view) {
@@ -261,12 +278,7 @@ public class GameFragment extends Fragment{
         }
 
         if (user1.user_win_condition == game_conditions[0]){
-            NavController navController = Navigation.findNavController(view);
-            Bundle bundle = new Bundle();
-            String encoding = user1.get_user_encoded();
-
-            bundle.putString("game_to_gameover", encoding);
-            navController.navigate(R.id.action_gameFragment_to_gameOverFragment, bundle);
+            stop_game(view);
         }
     }
 
@@ -383,5 +395,52 @@ public class GameFragment extends Fragment{
 
     public static void set_current_difficulty(String difficulty){
         current_difficulty = difficulty;
+    }
+
+    public void set_current_rounds(Integer rounds){
+        user1.user_goal = rounds;
+
+
+    }
+
+
+    public void start_timer(View view){
+        user1.user_start_time = SystemClock.uptimeMillis();
+
+        timer = (TextView) view.findViewById(R.id.timer);
+        handler.postDelayed(runnable, 0);
+    }
+
+    public void end_timer(){
+        user1.user_milli_second_time = SystemClock.uptimeMillis() - user1.user_start_time;
+        handler.removeCallbacks(runnable);
+    }
+
+    public Runnable runnable = new Runnable() {
+
+        public void run() {
+
+            user1.user_milli_second_time = SystemClock.uptimeMillis() - user1.user_start_time;
+
+            String current_time = user1.get_time_string();
+
+            timer.setText(current_time);
+
+            handler.postDelayed(this, 0);
+        }
+
+    };
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void stop_game(View view){
+        end_timer();
+
+        NavController navController = Navigation.findNavController(view);
+        Bundle bundle = new Bundle();
+        String encoding = user1.get_user_encoded();
+
+        bundle.putString("game_to_gameover", encoding);
+
+        navController.navigate(R.id.action_gameFragment_to_gameOverFragment, bundle);
     }
 }

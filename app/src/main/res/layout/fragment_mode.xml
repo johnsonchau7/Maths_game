@@ -8,12 +8,35 @@
     tools:context=".ModeFragment" >
 
     <TextView
-        android:id="@+id/game_title2"
+        android:id="@+id/rounds_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rounds:"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/rounds_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:scrollbarSize="30sp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rounds_text" />
+
+    <TextView
+        android:id="@+id/difficulty_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Difficulty:"
         android:textSize="40sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/rounds_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,7 +52,7 @@
         app:layout_constraintTop_toBottomOf="@+id/game_title" />
 
     <Spinner
-        android:id="@+id/mode_spinner"
+        android:id="@+id/difficulty_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center|center_horizontal|center_vertical"
@@ -37,5 +60,5 @@
         android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/game_title2" />
+        app:layout_constraintTop_toBottomOf="@+id/difficulty_text" />
 </androidx.constraintlayout.widget.ConstraintLayout>
