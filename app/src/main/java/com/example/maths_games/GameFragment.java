@@ -245,6 +245,8 @@ public class GameFragment extends Fragment{
     public void check_answers(View view){
         TextView outcome = (TextView) view.findViewById(R.id.outcome);
 
+        user1.increase_attempts();
+
         //1. check if answer is correct
         if (user1.user_input!= null && user1.user_input == qs.answer){
             outcome.setText("Correct!");
@@ -399,10 +401,7 @@ public class GameFragment extends Fragment{
 
     public void set_current_rounds(Integer rounds){
         user1.user_goal = rounds;
-
-
     }
-
 
     public void start_timer(View view){
         user1.user_start_time = SystemClock.uptimeMillis();
@@ -437,6 +436,8 @@ public class GameFragment extends Fragment{
 
         NavController navController = Navigation.findNavController(view);
         Bundle bundle = new Bundle();
+
+        user1.set_up_statistics();
         String encoding = user1.get_user_encoded();
 
         bundle.putString("game_to_gameover", encoding);

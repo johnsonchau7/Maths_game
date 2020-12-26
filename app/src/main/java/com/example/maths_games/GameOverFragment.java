@@ -98,6 +98,12 @@ public class GameOverFragment extends Fragment {
         set_game_score_string(decoded_outcome.get("gameScore"));
 
         set_game_time_string(decoded_outcome.get("gameTime"));
+
+        set_game_attempts_string(decoded_outcome.get("gameAttempts"));
+
+        set_game_avg_time_string(decoded_outcome.get("gameAvgTime"));
+
+        set_game_accuracy_string(decoded_outcome.get("gameAccuracy"));
     }
 
     public String long_to_string_time_converter(String time_string){
@@ -131,5 +137,20 @@ public class GameOverFragment extends Fragment {
         TextView current_game_time = (TextView) getView().findViewById(R.id.time_outcome_text);
         String current_time = long_to_string_time_converter(game_time);
         current_game_time.setText(String.format("Time: %s", current_time));
+    }
+
+    public void set_game_attempts_string(String game_attempts){
+        TextView current_game_score = (TextView) getView().findViewById(R.id.attempts_outcome_text);
+        current_game_score.setText(String.format("Attempts: %s", game_attempts));
+    }
+
+    public void set_game_avg_time_string(String game_avg_time){
+        TextView current_game_score = (TextView) getView().findViewById(R.id.avg_time_outcome_text);
+        current_game_score.setText(String.format("Avg time/question: %ss", game_avg_time));
+    }
+
+    public void set_game_accuracy_string(String game_accuracy){
+        TextView current_game_score = (TextView) getView().findViewById(R.id.accuracy_outcome_text);
+        current_game_score.setText(String.format("Accuracy: %s%%", game_accuracy));
     }
 }

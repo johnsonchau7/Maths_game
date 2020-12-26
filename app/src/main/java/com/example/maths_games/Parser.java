@@ -3,7 +3,7 @@ package com.example.maths_games;
 import java.util.HashMap;
 
 public class Parser {
-    
+
     public Parser(){
 
     }
