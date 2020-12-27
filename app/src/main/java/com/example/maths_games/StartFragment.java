@@ -1,9 +1,11 @@
 package com.example.maths_games;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -75,8 +77,11 @@ public class StartFragment extends Fragment {
         Button start_button = (Button) view.findViewById(R.id.start_button);
 
         start_button.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
+
+                Sound.get_vibration_effect(getContext());
 
                 //2. go to mode selection menu
                 navController.navigate(R.id.action_startFragment_to_modeFragment);

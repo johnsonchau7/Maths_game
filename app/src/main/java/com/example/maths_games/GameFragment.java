@@ -49,7 +49,7 @@ public class GameFragment extends Fragment{
     Button button0, button1, button2, button3, button4, button5, button6,
             button7, button8, button9, button_delete, button_enter;
 
-    String[] game_conditions = {"Win", "Lose"};
+    static String[] game_conditions = {"Win", "Lose"};
 
     TextView timer;
 
@@ -100,6 +100,10 @@ public class GameFragment extends Fragment{
         handler = new Handler();
     }
 
+    public static String[] get_game_outcome(){
+        return game_conditions;
+    }
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -144,6 +148,7 @@ public class GameFragment extends Fragment{
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
+                Sound.get_vibration_effect(getContext());
                 stop_game(view);
             }
         });
@@ -216,12 +221,13 @@ public class GameFragment extends Fragment{
 
     public void get_user_input(View view) {
         TextView user_input = (TextView) view.findViewById(R.id.user_input);
-        Button submit_button = (Button) view.findViewById(R.id.enter);
+        button_enter = (Button) view.findViewById(R.id.enter);
 
-        submit_button.setOnClickListener(new View.OnClickListener() {
+        button_enter.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
+                Sound.get_vibration_effect(getContext());
 
                 //1. get user input
                 String user_input_string = user_input.getText().toString();
@@ -249,6 +255,8 @@ public class GameFragment extends Fragment{
 
         //1. check if answer is correct
         if (user1.user_input!= null && user1.user_input == qs.answer){
+            Sound.get_question_correct_effect(getContext());
+
             outcome.setText("Correct!");
 
             //2. add score to user
@@ -262,6 +270,7 @@ public class GameFragment extends Fragment{
             new_question(view);
         }
         else{
+            Sound.get_question_wrong_effect(getContext());
             //continue looping current question if wrong
             outcome.setText("Wrong!");
         }
@@ -305,79 +314,103 @@ public class GameFragment extends Fragment{
         button8 = (Button) view.findViewById(R.id.eight);
         button9 = (Button) view.findViewById(R.id.nine);
         button_delete = (Button) view.findViewById(R.id.delete);
-        button_enter = (Button) view.findViewById(R.id.enter);
         TextView user_input = (TextView) view.findViewById(R.id.user_input);
 
         //1. set up user interface
         button1.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
-            public void onClick(View v) { write_digit(user_input,"1"); }
+            public void onClick(View v) {
+                Sound.get_vibration_effect(getContext());
+                write_digit(user_input,"1"); }
         });
 
         button2.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
-            public void onClick(View v) { write_digit(user_input,"2"); }
+            public void onClick(View v) {
+                Sound.get_vibration_effect(getContext());
+                write_digit(user_input,"2"); }
         });
 
         button3.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
+                Sound.get_vibration_effect(getContext());
                 write_digit(user_input,"3");
             }
         });
 
         button4.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
+                Sound.get_vibration_effect(getContext());
                 write_digit(user_input,"4");
             }
         });
 
         button5.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
+                Sound.get_vibration_effect(getContext());
                 write_digit(user_input,"5");
             }
         });
 
         button6.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
+                Sound.get_vibration_effect(getContext());
                 write_digit(user_input,"6");
             }
         });
 
         button7.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
+                Sound.get_vibration_effect(getContext());
                 write_digit(user_input,"7");
             }
         });
 
         button8.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
+                Sound.get_vibration_effect(getContext());
                 write_digit(user_input,"8");
             }
         });
 
         button9.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
+                Sound.get_vibration_effect(getContext());
                 write_digit(user_input,"9");
             }
         });
 
         button0.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
+                Sound.get_vibration_effect(getContext());
                 write_digit(user_input,"0");
             }
         });
 
         button_delete.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
+                Sound.get_vibration_effect(getContext());
+
                 String current_string = user_input.getText().toString();
                 String new_string = delete_string(current_string);
 

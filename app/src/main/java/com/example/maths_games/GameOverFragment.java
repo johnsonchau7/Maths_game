@@ -1,9 +1,11 @@
 package com.example.maths_games;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -78,8 +80,11 @@ public class GameOverFragment extends Fragment {
         Button start_button = (Button) view.findViewById(R.id.home_button);
 
         start_button.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
+                Sound.get_vibration_effect(getContext());
+
                 navController.navigate(R.id.action_gameOverFragment_to_startFragment);
             }
         });
@@ -126,6 +131,14 @@ public class GameOverFragment extends Fragment {
     public void set_game_condition_string(String game_condition){
         TextView current_game_outcome = (TextView) getView().findViewById(R.id.game_outcome_text);
         current_game_outcome.setText(game_condition);
+
+        String[] game_outcomes = GameFragment.get_game_outcome();
+        if (game_condition.equals(game_outcomes[0])){
+            Sound.get_game_win_effect(getContext());
+        }
+        else if (game_condition.equals(game_outcomes[1])){
+            Sound.get_game_over_effect(getContext());
+        }
     }
 
     public void set_game_score_string(String game_score){

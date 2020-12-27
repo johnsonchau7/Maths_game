@@ -95,8 +95,9 @@ public class ModeFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                //3. send mode selection by user
+                Sound.get_vibration_effect(getContext());
 
+                //3. send mode selection by user
                 Bundle bundle = new Bundle();
                 bundle.putString("mode_to_game", get_mode_encoded());
 
