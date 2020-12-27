@@ -83,7 +83,7 @@ public class GameOverFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                Sound.get_vibration_effect(getContext());
+                Sound.get_vibration_effect(v);
 
                 navController.navigate(R.id.action_gameOverFragment_to_startFragment);
             }

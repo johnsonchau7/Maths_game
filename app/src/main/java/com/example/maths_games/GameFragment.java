@@ -148,7 +148,7 @@ public class GameFragment extends Fragment{
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                Sound.get_vibration_effect(getContext());
+                Sound.get_vibration_effect(v);
                 stop_game(view);
             }
         });
@@ -227,7 +227,7 @@ public class GameFragment extends Fragment{
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                Sound.get_vibration_effect(getContext());
+                Sound.get_vibration_effect(v);
 
                 //1. get user input
                 String user_input_string = user_input.getText().toString();
@@ -255,7 +255,6 @@ public class GameFragment extends Fragment{
 
         //1. check if answer is correct
         if (user1.user_input!= null && user1.user_input == qs.answer){
-            Sound.get_question_correct_effect(getContext());
 
             outcome.setText("Correct!");
 
@@ -291,6 +290,9 @@ public class GameFragment extends Fragment{
         if (user1.user_win_condition == game_conditions[0]){
             stop_game(view);
         }
+        else{
+            Sound.get_question_correct_effect(getContext());
+        }
     }
 
     public void write_digit(TextView user_input, String s){
@@ -321,7 +323,7 @@ public class GameFragment extends Fragment{
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                Sound.get_vibration_effect(getContext());
+                Sound.get_vibration_effect(v);
                 write_digit(user_input,"1"); }
         });
 
@@ -329,7 +331,7 @@ public class GameFragment extends Fragment{
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                Sound.get_vibration_effect(getContext());
+                Sound.get_vibration_effect(v);
                 write_digit(user_input,"2"); }
         });
 
@@ -337,7 +339,7 @@ public class GameFragment extends Fragment{
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                Sound.get_vibration_effect(getContext());
+                Sound.get_vibration_effect(v);
                 write_digit(user_input,"3");
             }
         });
@@ -346,7 +348,7 @@ public class GameFragment extends Fragment{
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                Sound.get_vibration_effect(getContext());
+                Sound.get_vibration_effect(v);
                 write_digit(user_input,"4");
             }
         });
@@ -355,7 +357,7 @@ public class GameFragment extends Fragment{
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                Sound.get_vibration_effect(getContext());
+                Sound.get_vibration_effect(v);
                 write_digit(user_input,"5");
             }
         });
@@ -364,7 +366,7 @@ public class GameFragment extends Fragment{
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                Sound.get_vibration_effect(getContext());
+                Sound.get_vibration_effect(v);
                 write_digit(user_input,"6");
             }
         });
@@ -373,7 +375,7 @@ public class GameFragment extends Fragment{
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                Sound.get_vibration_effect(getContext());
+                Sound.get_vibration_effect(v);
                 write_digit(user_input,"7");
             }
         });
@@ -382,7 +384,7 @@ public class GameFragment extends Fragment{
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                Sound.get_vibration_effect(getContext());
+                Sound.get_vibration_effect(v);
                 write_digit(user_input,"8");
             }
         });
@@ -391,7 +393,7 @@ public class GameFragment extends Fragment{
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                Sound.get_vibration_effect(getContext());
+                Sound.get_vibration_effect(v);
                 write_digit(user_input,"9");
             }
         });
@@ -400,7 +402,7 @@ public class GameFragment extends Fragment{
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                Sound.get_vibration_effect(getContext());
+                Sound.get_vibration_effect(v);
                 write_digit(user_input,"0");
             }
         });
@@ -409,7 +411,7 @@ public class GameFragment extends Fragment{
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                Sound.get_vibration_effect(getContext());
+                Sound.get_vibration_effect(v);
 
                 String current_string = user_input.getText().toString();
                 String new_string = delete_string(current_string);

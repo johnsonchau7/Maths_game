@@ -5,6 +5,8 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.view.HapticFeedbackConstants;
+import android.view.View;
 
 import androidx.annotation.RequiresApi;
 
@@ -15,10 +17,8 @@ public class Sound {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public static void get_vibration_effect(Context context){
-        Vibrator vibrator = (Vibrator) context.getSystemService(context.VIBRATOR_SERVICE);
-        vibrator.cancel();
-        vibrator.vibrate(80);
+    public static void get_vibration_effect(View view){
+        view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
     }
 
     public static void get_question_correct_effect(Context context){

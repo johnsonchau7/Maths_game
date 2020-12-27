@@ -5,13 +5,15 @@
     android:id="@+id/difficulty"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ModeFragment" >
+    android:background="#c0d9d9"
+    tools:context=".ModeFragment">
 
     <TextView
         android:id="@+id/rounds_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Rounds:"
+        android:textColor="#253759"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,6 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Difficulty:"
+        android:textColor="#253759"
         android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/rounds_text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,9 +46,17 @@
 
     <Button
         android:id="@+id/ok_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="138dp"
+        android:layout_height="61dp"
+        android:hapticFeedbackEnabled="true"
+        android:paddingLeft="24sp"
+        android:paddingTop="6sp"
+        android:paddingRight="24sp"
+        android:paddingBottom="6sp"
         android:text="Ok"
+        android:textColor="#ffffff"
+        android:textSize="28sp"
+        app:backgroundTint="	#253759"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -55,6 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center|center_horizontal|center_vertical"
+        android:hapticFeedbackEnabled="true"
         android:scrollbarSize="30sp"
         android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"

@@ -10,9 +10,11 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.ArrayAdapter;
@@ -95,7 +97,7 @@ public class ModeFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Sound.get_vibration_effect(getContext());
+                Sound.get_vibration_effect(v);
 
                 //3. send mode selection by user
                 Bundle bundle = new Bundle();
@@ -121,6 +123,7 @@ public class ModeFragment extends Fragment {
                 android.R.layout.simple_spinner_item, difficulty_level_strings);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_difficulty.setAdapter(adapter);
+
     }
 
     public void set_up_rounds_spinner(View view){
