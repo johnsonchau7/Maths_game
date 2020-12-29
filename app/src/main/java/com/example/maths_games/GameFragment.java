@@ -184,25 +184,8 @@ public class GameFragment extends Fragment{
     }
 
     public void generate_question(){
-
-        //1. get question type
         Integer current_difficulty_int = difficulty_levels.get(current_difficulty);
-        int question_type_number = random.nextInt(current_difficulty_int);;
-        String current_question_type = question_type.get(question_type_number);
-
-        //2. create question
-        if (question_type_number == 0){
-            qs.create_addition_question(current_question_type);
-        }
-        else if (question_type_number == 1){
-            qs.create_subtraction_question(current_question_type);
-        }
-        else if (question_type_number == 2){
-            qs.create_multiplication_question(current_question_type);
-        }
-        else if (question_type_number == 3){
-            qs.create_division_question(current_question_type);
-        }
+        qs.generate_random_question(current_difficulty_int);
     }
 
     public void set_question(View view){

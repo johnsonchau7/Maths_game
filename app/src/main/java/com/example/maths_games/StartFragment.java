@@ -1,5 +1,8 @@
 package com.example.maths_games;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -10,12 +13,16 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.DisplayMetrics;
 import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.animation.LinearInterpolator;
 import android.widget.*;
+
+import java.util.Random;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -85,6 +92,65 @@ public class StartFragment extends Fragment {
 
                 //2. go to mode selection menu
                 navController.navigate(R.id.action_startFragment_to_modeFragment);
+            }
+        });
+
+        animate_falling_text(view);
+    }
+
+    public void animate_falling_text(View view){
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+
+        int height = displaymetrics.heightPixels;
+        int width = displaymetrics.widthPixels;
+
+        int min_x = 0 + 50;
+        int max_x = width - 350;
+
+        TextView falling_text = (TextView) view.findViewById(R.id.falling_text);
+
+        falling_text.setX(100f);
+        falling_text.setY(-100f);
+
+        ObjectAnimator animation = ObjectAnimator.ofFloat(falling_text,
+                "translationY", height + 200f);
+
+        animation.setInterpolator(new LinearInterpolator());
+        animation.setRepeatCount(animation.INFINITE);
+        animation.setRepeatMode(animation.RESTART);
+
+        animation.setDuration(5000);
+        animation.start();
+
+        Question qs = new Question();
+
+        animation.addListener(new Animator.AnimatorListener() {
+            Random random = new Random();
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+                int i = random.nextInt(max_x - min_x) + min_x;
+                falling_text.setX((float) i);
+                falling_text.setY(-100f);
+
+                qs.generate_random_question(4);
+                qs.set_question_text_animation(falling_text);
             }
         });
     }

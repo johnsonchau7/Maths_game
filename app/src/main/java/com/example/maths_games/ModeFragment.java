@@ -91,6 +91,7 @@ public class ModeFragment extends Fragment {
         //2. set up navigation controls
         NavController navController = Navigation.findNavController(view);
         Button start_button = (Button) view.findViewById(R.id.ok_button);
+        Button back_button = (Button) view.findViewById(R.id.back_home_button);
 
         start_button.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -105,6 +106,18 @@ public class ModeFragment extends Fragment {
 
                 //4. go to mode selection menu
                 navController.navigate(R.id.action_modeFragment_to_gameFragment, bundle);
+            }
+        });
+
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onClick(View v) {
+
+                Sound.get_vibration_effect(v);
+
+                //4. go to mode selection menu
+                navController.navigate(R.id.action_modeFragment_to_startFragment);
             }
         });
     }

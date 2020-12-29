@@ -11,7 +11,12 @@
         tools:layout="@layout/fragment_start" >
         <action
             android:id="@+id/action_startFragment_to_modeFragment"
-            app:destination="@id/modeFragment" />
+            app:destination="@id/modeFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/startFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
@@ -21,6 +26,10 @@
         <action
             android:id="@+id/action_gameFragment_to_gameOverFragment"
             app:destination="@id/gameOverFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/startFragment" />
     </fragment>
     <fragment
@@ -31,6 +40,10 @@
         <action
             android:id="@+id/action_gameOverFragment_to_startFragment"
             app:destination="@id/startFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/startFragment" />
     </fragment>
     <fragment
@@ -41,6 +54,18 @@
         <action
             android:id="@+id/action_modeFragment_to_gameFragment"
             app:destination="@id/gameFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/startFragment" />
+        <action
+            android:id="@+id/action_modeFragment_to_startFragment"
+            app:destination="@id/startFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/startFragment" />
     </fragment>
 </navigation>

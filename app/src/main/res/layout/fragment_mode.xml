@@ -8,6 +8,24 @@
     android:background="#c0d9d9"
     tools:context=".ModeFragment">
 
+    <Button
+        android:id="@+id/back_home_button"
+        android:layout_width="90dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:hapticFeedbackEnabled="true"
+        android:paddingLeft="24sp"
+        android:paddingTop="6sp"
+        android:paddingRight="24sp"
+        android:paddingBottom="6sp"
+        android:text="Back"
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        app:backgroundTint="	#253759"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/rounds_text"
         android:layout_width="wrap_content"
