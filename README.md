@@ -1,4 +1,4 @@
-# Quick Maths
+# Quick Maths - Android Mobile Game
 
 Quick Maths - A free maths trivia game for students to finesse their arithmetic skills. Designed for anyone who enjoys fast paced mathematics!
 
